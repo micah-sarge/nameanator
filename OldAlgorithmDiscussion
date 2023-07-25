@@ -1,0 +1,142 @@
+Original Algorithms
+
+
+
+Program 1
+
+Decompiler
+
+set of data (US census 2010)
+
+create probablity tables
+
+
+assumptions
+	all and only A-Z are used
+	every name has a commonality value
+	names end with [ ]
+	
+
+algorithm
+	3 matrixes
+		first
+		first two
+		threes
+	
+	run through list
+		first char->int
+		use the int as matrix index
+		add commonality value to matrix
+		
+		first and second char-> int
+		use ints as matrix indexes
+		add commonality values to matrix
+		
+	threes matrix
+		start with list entry 1
+			char 1, 2, 3
+				convert char to int for matrix indexes
+					add commonality
+					
+			advance char 2, 3, 4
+				convert
+					add
+					
+			until char x-2,x-1,x x=[ ]
+		advance entry
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Program 2
+
+Generator
+
+tables to names
+
+
+start with matrix_first
+	random number generate between 1 and SUM[matrix_first[1-26]]
+	corresponds to entry in matrix
+first_letter
+
+matrix_first_two
+	using first letter for first matrix index
+	random number between 1 and SUM[matrix_first_two[first_letter:1-26]]
+	corresponds to entry in matrix_first_two
+second letter
+
+string name = i + j
+
+from here...
+	i j k indexes
+	i = first_letter, j = second_letter
+		SUM[threes[i,j,k] for k=1 until k=27
+		random number between 1 and SUM
+		determine k
+		
+	name=name+k
+	i=j, j=k
+	loop back until k=27
+	
+	
+	
+	
+	christopher
+	roberoberoberry
+
+
+
+janky probablity measures
+
+how probable is the product of each of the individual probablities
+how probable is a name of this length
+
+
+lower probablity bound was 10 million
+john = value of J * value of JO *  value of JOH * value of OHN * value of OH[] * length4
+		5000			3900			51875			2535		153				313513544138
+
+
+
+
+
+
+
+
+
+to improve
+
+flexibility with character base
+more refined pruning
+
+
+michard
+
+
+
+user data set
+	start by creating an alphabet and mapping entries 
+	
+	comparison at end
+		for name JOHN
+		check against J... list
+		
+
+
+
+abcjig7~
+asdfghjkl;'
+
+adfghjkls;'
