@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This is my test title</title>
+  <link rel="canonical" href="https://msargen.github.io/nameanator/" />
+  <link rel="manifest" href="/nameanator/src/webapp/manifest.webmanifest">
+</head>
+<body>
+  <h1>Hello there!</h1>
+    …
+  <script>
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register (
+          '/nameanator/src/webapp/sw.js',
+          {scope: '/nameanator/'}
+        )
+      }
+  </script>
+</body>
+</html>
