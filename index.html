@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>This is my test title</title>
-  <link rel="canonical" href="https://msargen.github.io/nameanator/" />
-  <link rel="manifest" href="/nameanator/manifest.webmanifest">
-</head>
-<body>
-  <h1>Hello there!</h1>
-    …
-  <script>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is my test title</title>
+    <link rel="canonical" href="https://msargen.github.io/nameanator/" />
+    <link rel="manifest" href="/nameanator/manifest.webmanifest">
+    <!-- This will probably need to be changed in some way -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script> 
+    
+    <script>
       if (navigator.serviceWorker) {
         navigator.serviceWorker.register (
           '/nameanator/sw.js',
           {scope: '/nameanator/'}
         )
       }
-  </script>
-</body>
+    </script>
+    <script>
+      $(function(){
+        $("#includedContent").load("src/webapp/nameanator.html"); 
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <h1>Hello there!</h1>
+        You are a pretty cool person!
+    </div>
+    
+    <div>
+      <button type="button">Test Button</button>
+    </div>
+
+    <div>
+      <div id="includedContent"></div>
+    </div>
+  </body>
 </html>
