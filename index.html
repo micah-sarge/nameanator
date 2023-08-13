@@ -19,26 +19,32 @@
     </script>
     <script>
       $(function(){
-        $("#includedContent").load("src/webapp/nameanator.html"); 
+        $("#name_generator").load("src/webapp/name_generator.html"); 
       });
     </script>
+    <script>
+      $(function(){
+        $("#probability_generator").load("src/webapp/probability_generator.html"); 
+      });
+    </script>
+    
 
-    <script type="text/javascript" src="tester.js"></script>
   </head>
 
-  <body>
-    <div>
-      <h1>Hello there!</h1>
-        You are a pretty cool person!
-    </div>
-    
-    <div>
-      <button type="button">Test Button - this does nothing</button>
-    </div>
+  <center>
+    <body>
+      <div>
+        <div id="probability_generator"></div>
+      </div>
 
-    <div>
-      <div id="includedContent"></div>
-    </div>
+      <div>
+        <hr>
+      </div>
 
-  </body>
+      <div>
+        <div id="name_generator"></div>
+      </div>
+
+    </body>
+  </center>
 </html>
