@@ -1,5 +1,5 @@
 function main () {
-    alert("You pressed the button, how dare you...you monster");
+    alert("Patience Iago, there is nothing to submit at this point. ");
 }
 
 function myFunction() {
