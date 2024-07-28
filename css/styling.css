@@ -1,0 +1,47 @@
+* {
+    box-sizing: boarder-box;
+    color: #777;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background-color: red;
+    color: white;
+}
+
+.lang-div h1 {
+    margin: 0;
+}
+
+.lang-div {
+    /* Changes background image opacity */
+    background-color: rgba(255, 255, 255, 0.5);
+    background-blend-mode: lighten;
+
+    background-image: url("../images/icon_smile.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 25% 50%;
+    padding-bottom: 15px;
+}
+
+.lang-label {
+    font-size: 30px;
+}
+
+.lang-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.select-census {
+    color: black;
+}
+
+.input-file {
+    color: black;
+}
