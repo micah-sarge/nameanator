@@ -17,13 +17,13 @@
           <option value="usCensus2022">US Census 2022</option>
         </select>
       </div>
-
+      
       <div>
-        <input class="input-file" type="file" id="userInputLanguage" name="userInputLanguage">
+        <button class="button" type="submit" onclick="generateProbabilityFile()">Generate Probabilities</button>
       </div>
 
       <div>
-        <button class="button" type="submit" onclick="main()">Submit</button>
+        <input class="input-file" type="file" id="userInputLanguage" onChange="fileSelected(event)">
       </div>
 
     </div>

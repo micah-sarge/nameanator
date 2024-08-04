@@ -1,5 +1,53 @@
-function main () {
+function generateProbabilityFile () {
     alert("Patience Iago, there is nothing to submit at this point. ");
+    let oneD = new Array();
+    for (let i=0; i<27; i++) {
+        oneD[i] = 0;
+    }
+
+
+    let twoD = new Array();
+    for (let i=0; i<27; i++) {
+        twoD[i] = new Array();
+        for(let j=0; j<27; j++) {
+            twoD[i][j] = 0;
+        }
+    }
+
+    let threeD = new Array();
+    for (let i=0; i<27; i++) {
+        threeD[i] = new Array();
+        for(let j=0; j<27; j++) {
+            threeD[i][j] = new Array();
+            for(let k=0; k<27; k++){
+                threeD[i][j][k] = 0;
+            }
+        }
+    }
+
+}
+
+function fileSelected(event) {
+
+    let file = event.target.files[0];
+    let reader = new FileReader();
+
+    reader.readAsText(file);
+
+
+    reader.onload = function() {
+        let listOfNames = reader.result.split(/\r?\n/);
+
+        listOfNames.forEach(processName);
+
+        // Probably show the user that their probability tables are being generated
+    }
+
+    
+}
+
+function processName(item) {
+    console.log(item);
 }
 
 function myFunction() {
