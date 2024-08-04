@@ -1,5 +1,28 @@
-function main () {
-    alert("You pressed the button, how dare you...you monster");
+function generateProbabilityFile () {
+    alert("Patience Iago, there is nothing to submit at this point. ");
+}
+
+function fileSelected(event) {
+
+    let file = event.target.files[0];
+    let reader = new FileReader();
+
+    reader.readAsText(file);
+
+
+    reader.onload = function() {
+        let listOfNames = reader.result.split(/\r?\n/);
+
+        listOfNames.forEach(processName);
+
+        // Probably show the user that their probability tables are being generated
+    }
+
+    
+}
+
+function processName(item) {
+    console.log(item);
 }
 
 function myFunction() {
