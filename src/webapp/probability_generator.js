@@ -1,14 +1,39 @@
+// global vars
+var firstLetters = new Array();
+var doubleLetters = new Array();
+var tripleLetters = new Array();
+
 function generateProbabilityFile () {
     alert("Patience Iago, there is nothing to submit at this point. ");
 }
 
 function fileSelected(event) {
+    //Initialize the 1D, 2D, and 3D arrays
+    for (var i=0; i<27; i++) {
+        firstLetters[i] = 0;
+    }
+
+    for (var i=0; i<27; i++) {
+        doubleLetters[i] = new Array();
+        for(var j=0; j<27; j++) {
+            doubleLetters[i][j] = 0;
+        }
+    }
+
+    for (var i=0; i<27; i++) {
+        tripleLetters[i] = new Array();
+        for(var j=0; j<27; j++) {
+            tripleLetters[i][j] = new Array();
+            for(var k=0; k<27; k++) {
+                tripleLetters[i][j][k] = 0;
+            }
+        }
+    }
 
     let file = event.target.files[0];
     let reader = new FileReader();
 
     reader.readAsText(file);
-
 
     reader.onload = function() {
         let listOfNames = reader.result.split(/\r?\n/);
@@ -17,65 +42,14 @@ function fileSelected(event) {
 
         // Probably show the user that their probability tables are being generated
     }
-
     
 }
 
 function processName(item) {
-    console.log(item);
-}
-
-function myFunction() {
-    document.getElementById("demo").innerHTML = "How did you do that? You must be a wizard!";
-}
-
-/*
-if (dataInput==textBox) {
-    Read from text box
-} else if (dataInput==file) {
-    Read from file
-} else {
-    skip to generation
-}
-
-change all letters to lowercase
-
-*/
-
-
-//Initialize the 1D, 2D, and 3D arrays
-var firstLetters = new Array();
-for (var i=0; i<27; i++) {
-    firstLetters[i] = 0;
-}
-
-var doubleLetters = new Array();
-for (var i=0; i<27; i++) {
-    doubleLetters[i] = new Array();
-    for(var j=0; j<27; j++) {
-        doubleLetters[i][j] = 0;
-    }
-}
-
-var tripleLetters = new Array();
-for (var i=0; i<27; i++) {
-    tripleLetters[i] = new Array();
-    for(var j=0; j<27; j++) {
-        tripleLetters[i][j] = new Array();
-        for(var k=0; k<27; k++) {
-            tripleLetters[i][j][k] = 0;
-        }
-    }
-}
-
-//Loop through list of names to generate probabilities from
-for (until end of file) {
-    var currentName = "John";
+    // change currentName to all lowercase
+    var currentName = item.toLowerCase();
     var a = "J", b = "o", c = "h";
     var x=0;
-
-    //Read name from list of names
-    //this needs to be added still
 
     //Add 1 to index of starting letter
     a = currentName.charAt(x);
