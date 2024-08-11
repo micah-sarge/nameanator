@@ -1,11 +1,10 @@
 window.onload = init;
 
-// Get/initialize existing name dictionary
-let existingNames = {};
 function init() {
-    // set existingNames here
+    // set existingNames here? Maybe
 }
 
+// TODO: remove this after we add the option for generating multiple names at the same time
 function generateNumbers () {
     var nameList = document.getElementById("nameList");
     var uniqueList = [];
@@ -27,7 +26,56 @@ function generateNames () {
 
     nameList.insertAdjacentHTML("afterbegin", "<hr>");
 
-    //if random needs init, use systime
+    // To prevent an infinite loop
+    let maxTries = 10;
+    let attempt = 0;
+
+    let genName;
+    do {
+        genName = generateSingleName();
+        attempt++;
+    } while (!checkNameValidity(genName) && attempt <= maxTries)
+        
+    nameList.insertAdjacentHTML("afterbegin", "<li>" + genName + "</li>");
+}
+
+// Check that the generated name is within the desired length parameters and that the name doesn't already exist in the
+// given file of names
+function checkNameValidity(generatedName){
+    // Check min and max name length
+    if (generatedName.length < minNameLength) {
+        return false;
+    }
+    if (generatedName.length > maxNameLength) {
+        return false;
+    }
+    
+    // Check if the name already exists in the passed file
+    let currentMap = existingNames;
+    let letter;
+    for (let x = 0; x < generatedName.length; x++) {
+        letter = generatedName.charAt(x);
+        if (currentMap.has(letter)) {
+            currentMap = currentMap.get(letter);
+        }
+        else {
+            return true;
+        }
+    }
+
+    if (currentMap.has(" ")) {
+        return false;
+    }
+
+    return true;
+}
+
+function clearList() {
+    var nameList = document.getElementById("nameList");
+    nameList.innerHTML = "";
+}
+
+function generateSingleName() {
 
     var countingNumber = 0, arraySum = 0;
     var theName = new Array();
@@ -82,7 +130,6 @@ function generateNames () {
         if (k<26) {
             theName[x] = String.fromCharCode(k+97);
         } else {
-            theName[x] = " ";
             wordEnd = true;
         }
 
@@ -91,31 +138,8 @@ function generateNames () {
         j=k;
     }
 
-    // turn array into string
+    // Turn array into string
+    let name = theName.toString().replaceAll(',', '');
 
-    nameList.insertAdjacentHTML("afterbegin", "<li>" + theName + "</li>");
-
+    return name;
 }
-
-function clearList() {
-    var nameList = document.getElementById("nameList");
-    nameList.innerHTML = "";
-}
-
-
-
-
-
-
-
-
-
-/*
-some kind of function to avoid weird names
-
-importantly, they cannot be too long
-
-also they cannot be real (check input list)
-
-print.theName
-*/

@@ -3,6 +3,13 @@ var firstLetters = new Array();
 var doubleLetters = new Array();
 var tripleLetters = new Array();
 
+// Existing name map
+var existingNames = new Map();
+
+// // Set min/max name lengths
+var minNameLength = 0;
+var maxNameLength = 0;
+
 function generateProbabilityFile () {
     alert("Patience Iago, there is nothing to submit at this point. ");
 }
@@ -75,4 +82,46 @@ function processName(item) {
 
     tripleLetters[(a.charCodeAt(0)-97)][(b.charCodeAt(0)-97)][26] += 1;
 
+    // Set the min/max name lengths
+    checkMinMax(currentName.length);
+
+    // Add the name to the map of existing names
+    addNameToExistingNames(currentName);
+
 }
+
+function checkMinMax(nameLength) {
+    // Check for if this is the first name
+    if (minNameLength == 0) {
+        minNameLength = nameLength;
+    }
+    
+    if (nameLength < minNameLength) {
+        minNameLength = nameLength;
+    }
+
+    if (nameLength > maxNameLength) {
+        maxNameLength = nameLength;
+    }
+}
+
+function addNameToExistingNames(nameToAdd) {
+    // Set the map to be checked to the current map of existing names
+    let currentMap = existingNames;
+    let letter;
+    for (let x = 0; x < nameToAdd.length; x++) {
+        letter = nameToAdd.charAt(x);
+        if (!currentMap.has(letter)) {
+            // If the letter isn't in the map, add the key and set the value to a new map
+            currentMap.set(letter, new Map());
+            currentMap = currentMap.get(letter);
+        }
+        else {
+            // If the letter already exists in this map layer, set the current map to the next layer map for this letter
+            currentMap = currentMap.get(letter);
+        }
+    }
+    // Set a final entry for this letter indicating that this end is a valid name
+    currentMap.set(" ", "");
+}
+
