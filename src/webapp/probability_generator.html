@@ -10,12 +10,11 @@
       <h1 class="lang-header">Language Base</h1>
 
       <div>
-        <label class="lang-label" for="languages">Select a language from which you would like to generate names</label><br>
-        <select class="select-census" name="languages" id="languages">
-          <option value="usCensus2020">Nothing selected</option>
-          <option value="usCensus2020">US Census 2020</option>
-          <option value="usCensus2021">US Census 2021</option>
-          <option value="usCensus2022">US Census 2022</option>
+        <label class="lang-label" for="probability_lists">Select a list from which you would like to generate names</label><br>
+        <select class="select-list" name="probability_lists" id="probability_lists">
+          <option value="nothing">Nothing selected</option>
+          <option value="top400">Top 400 baby names 2010s</option>
+          <option value="1200Males">1200 male names</option>
         </select>
       </div>
       
@@ -25,6 +24,10 @@
 
       <div>
         <input class="input-file" type="file" id="userInputLanguage" onChange="fileSelected(event)">
+      </div>
+
+      <div>
+        <label class="lang-label" id="userListAlert">Name probabilities have been generated from: No file selected</label><br>
       </div>
 
     </div>
