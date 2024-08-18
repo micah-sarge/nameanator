@@ -1,14 +1,46 @@
+// global vars
+var firstLetters = new Array();
+var doubleLetters = new Array();
+var tripleLetters = new Array();
+
+// Existing name map
+var existingNames = new Map();
+
+// // Set min/max name lengths
+var minNameLength = 0;
+var maxNameLength = 0;
+
 function generateProbabilityFile () {
     alert("Patience Iago, there is nothing to submit at this point. ");
 }
 
 function fileSelected(event) {
+    //Initialize the 1D, 2D, and 3D arrays
+    for (var i=0; i<27; i++) {
+        firstLetters[i] = 0;
+    }
+
+    for (var i=0; i<27; i++) {
+        doubleLetters[i] = new Array();
+        for(var j=0; j<27; j++) {
+            doubleLetters[i][j] = 0;
+        }
+    }
+
+    for (var i=0; i<27; i++) {
+        tripleLetters[i] = new Array();
+        for(var j=0; j<27; j++) {
+            tripleLetters[i][j] = new Array();
+            for(var k=0; k<27; k++) {
+                tripleLetters[i][j][k] = 0;
+            }
+        }
+    }
 
     let file = event.target.files[0];
     let reader = new FileReader();
 
     reader.readAsText(file);
-
 
     reader.onload = function() {
         let listOfNames = reader.result.split(/\r?\n/);
@@ -17,65 +49,14 @@ function fileSelected(event) {
 
         // Probably show the user that their probability tables are being generated
     }
-
     
 }
 
 function processName(item) {
-    console.log(item);
-}
-
-function myFunction() {
-    document.getElementById("demo").innerHTML = "How did you do that? You must be a wizard!";
-}
-
-/*
-if (dataInput==textBox) {
-    Read from text box
-} else if (dataInput==file) {
-    Read from file
-} else {
-    skip to generation
-}
-
-change all letters to lowercase
-
-*/
-
-
-//Initialize the 1D, 2D, and 3D arrays
-var firstLetters = new Array();
-for (var i=0; i<27; i++) {
-    firstLetters[i] = 0;
-}
-
-var doubleLetters = new Array();
-for (var i=0; i<27; i++) {
-    doubleLetters[i] = new Array();
-    for(var j=0; j<27; j++) {
-        doubleLetters[i][j] = 0;
-    }
-}
-
-var tripleLetters = new Array();
-for (var i=0; i<27; i++) {
-    tripleLetters[i] = new Array();
-    for(var j=0; j<27; j++) {
-        tripleLetters[i][j] = new Array();
-        for(var k=0; k<27; k++) {
-            tripleLetters[i][j][k] = 0;
-        }
-    }
-}
-
-//Loop through list of names to generate probabilities from
-for (until end of file) {
-    var currentName = "John";
+    // change currentName to all lowercase
+    var currentName = item.toLowerCase();
     var a = "J", b = "o", c = "h";
     var x=0;
-
-    //Read name from list of names
-    //this needs to be added still
 
     //Add 1 to index of starting letter
     a = currentName.charAt(x);
@@ -101,4 +82,46 @@ for (until end of file) {
 
     tripleLetters[(a.charCodeAt(0)-97)][(b.charCodeAt(0)-97)][26] += 1;
 
+    // Set the min/max name lengths
+    checkMinMax(currentName.length);
+
+    // Add the name to the map of existing names
+    addNameToExistingNames(currentName);
+
 }
+
+function checkMinMax(nameLength) {
+    // Check for if this is the first name
+    if (minNameLength == 0) {
+        minNameLength = nameLength;
+    }
+    
+    if (nameLength < minNameLength) {
+        minNameLength = nameLength;
+    }
+
+    if (nameLength > maxNameLength) {
+        maxNameLength = nameLength;
+    }
+}
+
+function addNameToExistingNames(nameToAdd) {
+    // Set the map to be checked to the current map of existing names
+    let currentMap = existingNames;
+    let letter;
+    for (let x = 0; x < nameToAdd.length; x++) {
+        letter = nameToAdd.charAt(x);
+        if (!currentMap.has(letter)) {
+            // If the letter isn't in the map, add the key and set the value to a new map
+            currentMap.set(letter, new Map());
+            currentMap = currentMap.get(letter);
+        }
+        else {
+            // If the letter already exists in this map layer, set the current map to the next layer map for this letter
+            currentMap = currentMap.get(letter);
+        }
+    }
+    // Set a final entry for this letter indicating that this end is a valid name
+    currentMap.set(" ", "");
+}
+
