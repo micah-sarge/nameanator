@@ -17,21 +17,21 @@ function generateProbabilityFile () {
     let selectedList = document.getElementById("probability_lists");
 
     if (selectedList.value == "top400") {
-        fetch('data/top_400_baby_names_2010s.txt')
+        fetch("data/top_400_baby_names_2010s.txt")
             .then(response => response.text())
             .then(text => {
                 let listOfNames = text.split(/\r?\n/);
                 listOfNames.forEach(processName);
             })
-            alertUserAfterGeneration();
+            alertUserAfterGeneration("top_400_baby_names_2010s.txt");
     } else if (selectedList.value == "1200Males") {
-        fetch('data/1200MaleNames.txt')
+        fetch("data/1200MaleNames.txt")
             .then(response => response.text())
             .then(text => {
                 let listOfNames = text.split(/\r?\n/);
                 listOfNames.forEach(processName);
             })
-        alertUserAfterGeneration();
+        alertUserAfterGeneration("1200MaleNames.txt");
     } else {
         alert("No list of names was selected.");
     }
@@ -51,9 +51,9 @@ function fileSelected(event) {
         let listOfNames = reader.result.split(/\r?\n/);
 
         listOfNames.forEach(processName);
-
-        // Probably show the user that their probability tables are being generated
     }
+
+    alertUserAfterGeneration(file.name);
     
 }
 
@@ -154,12 +154,12 @@ function initializeArrays() {
     }
 }
 
-function alertUserAfterGeneration() {
+function alertUserAfterGeneration(fileName) {
     // Add a line to the generated name section to inform the user that the list they selected has been used to generate
     // name probabilities
-    var nameList = document.getElementById("nameList");
-    nameList.insertAdjacentHTML("afterbegin", "<hr>");
-    nameList.insertAdjacentHTML("afterbegin", "<li>" + "Name probabilities have been generated." + "</li>");
+    var userAlert = document.getElementById("userListAlert");
+    userAlert.innerHTML = "";
+    userAlert.insertAdjacentHTML("afterbegin",  "Name probabilities have been generated from: " + fileName);
 
 }
 
