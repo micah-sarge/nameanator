@@ -11,31 +11,36 @@ var minNameLength = 0;
 var maxNameLength = 0;
 
 function generateProbabilityFile () {
-    alert("Patience Iago, there is nothing to submit at this point. ");
+    // Initialize the arrays
+    initializeArrays();
+
+    let selectedList = document.getElementById("probability_lists");
+
+    if (selectedList.value == "top400") {
+        fetch('data/top_400_baby_names_2010s.txt')
+            .then(response => response.text())
+            .then(text => {
+                let listOfNames = text.split(/\r?\n/);
+                listOfNames.forEach(processName);
+            })
+            alertUserAfterGeneration();
+    } else if (selectedList.value == "1200Males") {
+        fetch('data/1200MaleNames.txt')
+            .then(response => response.text())
+            .then(text => {
+                let listOfNames = text.split(/\r?\n/);
+                listOfNames.forEach(processName);
+            })
+        alertUserAfterGeneration();
+    } else {
+        alert("No list of names was selected.");
+    }
+    
 }
 
 function fileSelected(event) {
-    //Initialize the 1D, 2D, and 3D arrays
-    for (var i=0; i<27; i++) {
-        firstLetters[i] = 0;
-    }
-
-    for (var i=0; i<27; i++) {
-        doubleLetters[i] = new Array();
-        for(var j=0; j<27; j++) {
-            doubleLetters[i][j] = 0;
-        }
-    }
-
-    for (var i=0; i<27; i++) {
-        tripleLetters[i] = new Array();
-        for(var j=0; j<27; j++) {
-            tripleLetters[i][j] = new Array();
-            for(var k=0; k<27; k++) {
-                tripleLetters[i][j][k] = 0;
-            }
-        }
-    }
+    // Initialize the arrays
+    initializeArrays();
 
     let file = event.target.files[0];
     let reader = new FileReader();
@@ -123,5 +128,38 @@ function addNameToExistingNames(nameToAdd) {
     }
     // Set a final entry for this letter indicating that this end is a valid name
     currentMap.set(" ", "");
+}
+
+function initializeArrays() {
+    //Initialize the 1D, 2D, and 3D arrays
+    for (var i=0; i<27; i++) {
+        firstLetters[i] = 0;
+    }
+
+    for (var i=0; i<27; i++) {
+        doubleLetters[i] = new Array();
+        for(var j=0; j<27; j++) {
+            doubleLetters[i][j] = 0;
+        }
+    }
+
+    for (var i=0; i<27; i++) {
+        tripleLetters[i] = new Array();
+        for(var j=0; j<27; j++) {
+            tripleLetters[i][j] = new Array();
+            for(var k=0; k<27; k++) {
+                tripleLetters[i][j][k] = 0;
+            }
+        }
+    }
+}
+
+function alertUserAfterGeneration() {
+    // Add a line to the generated name section to inform the user that the list they selected has been used to generate
+    // name probabilities
+    var nameList = document.getElementById("nameList");
+    nameList.insertAdjacentHTML("afterbegin", "<hr>");
+    nameList.insertAdjacentHTML("afterbegin", "<li>" + "Name probabilities have been generated." + "</li>");
+
 }
 
