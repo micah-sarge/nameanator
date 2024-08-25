@@ -1,28 +1,13 @@
-window.onload = init;
 
-function init() {
-    // set existingNames here? Maybe
-}
+function generateNames(numberOfNames) {
 
-// TODO: remove this after we add the option for generating multiple names at the same time
-function generateNumbers () {
+    if (!probabilitiesGenerated) {
+        alert("No probabilities have been generated.");
+        return;
+    }
+
     var nameList = document.getElementById("nameList");
     var uniqueList = [];
-
-    nameList.insertAdjacentHTML("afterbegin", "<hr>");
-
-    for (let i = 0; i < 10; i++) {
-        do {
-            var rand = Math.floor(Math.random() * 10) + 1;
-        } while (uniqueList.includes(rand));
-        uniqueList.push(rand);
-        
-        nameList.insertAdjacentHTML("afterbegin", "<li>" + rand + "</li>");
-    }
-}
-
-function generateNames () {
-    var nameList = document.getElementById("nameList");
 
     nameList.insertAdjacentHTML("afterbegin", "<hr>");
 
@@ -30,13 +15,16 @@ function generateNames () {
     let maxTries = 10;
     let attempt = 0;
 
-    let genName;
-    do {
-        genName = generateSingleName();
-        attempt++;
-    } while (!checkNameValidity(genName) && attempt <= maxTries)
-        
-    nameList.insertAdjacentHTML("afterbegin", "<li>" + genName + "</li>");
+    for (let i = 0; i < numberOfNames; i++) {
+        let genName;
+        do {
+            genName = generateSingleName();
+            attempt++;
+        } while (!checkNameValidity(genName) && attempt <= maxTries || uniqueList.includes(genName))
+        uniqueList.push(genName);
+            
+        nameList.insertAdjacentHTML("afterbegin", "<li>" + genName + "</li>");
+    }
 }
 
 // Check that the generated name is within the desired length parameters and that the name doesn't already exist in the

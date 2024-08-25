@@ -1,6 +1,6 @@
 * {
     box-sizing: boarder-box;
-    color: #777;
+    color: #000;
 }
 
 html, body {
@@ -9,28 +9,37 @@ html, body {
 }
 
 button {
-    background-color: red;
+    background-color: green;
     color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .lang-div h1 {
     margin: 0;
 }
 
-.lang-div {
+.background {
     /* Changes background image opacity */
     background-color: rgba(255, 255, 255, 0.5);
     background-blend-mode: lighten;
 
-    background-image: url("../images/icon_smile.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 25% 50%;
-    padding-bottom: 15px;
+    background-image: url("../images/mountains2.jpg");
+    background-size: 100% auto;
+}
+
+
+.generatedList {
+    overflow-y: auto;
+    max-height: 60vh;
 }
 
 .lang-label {
     font-size: 30px;
+}
+
+.number_of_names-label {
+    font-size: 15px;
 }
 
 .lang-header {
@@ -45,3 +54,8 @@ button {
 .input-file {
     color: black;
 }
+
+.no-bullets {
+    list-style-type: none;
+}
+

@@ -10,12 +10,28 @@
       <h1>Generate Names</h1>
 
       <div>
-        <button class="button" type="button" onclick="generateNames()">Generate</button>
+        <label class="number_of_names-label" for="number_of_names">Choose how many names you would like to generate</label><br>
+        <select class="select-list" name="number_of_names" id="number_of_names">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+
+      <div>
+        <button class="button" type="button" onclick="generateNames(number_of_names.value)">Generate</button>
         <button class="button" type="button" onclick="clearList()">Clear</button>
       </div>
 
-      <div id="showList" name="generatedList">
-        <ul id="nameList" style="list-style-position: inside;"></ul>
+      <div class="generatedList" id="showList" name="generatedList">
+        <ul class="no-bullets" id="nameList" style="list-style-position: inside;"></ul>
       </div>
 
     </div>
