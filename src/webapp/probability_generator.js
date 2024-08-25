@@ -15,6 +15,9 @@ var alphabetArray = new Array();
 var alphabetMap = new Map();
 var alphaLength = 0;
 
+// Indicates that probabilities have been generated
+var probabilitiesGenerated = false;
+
 function generateProbabilityFile () {
     let selectedList = document.getElementById("probability_lists");
 
@@ -187,5 +190,7 @@ function alertUserAfterGeneration(fileName) {
     var userAlert = document.getElementById("userListAlert");
     userAlert.innerHTML = "";
     userAlert.insertAdjacentHTML("afterbegin",  "Name probabilities have been generated from: " + fileName);
+
+    probabilitiesGenerated = true;
 
 }
