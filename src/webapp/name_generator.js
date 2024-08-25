@@ -22,7 +22,6 @@ function generateNames(numberOfNames) {
             attempt++;
         } while (!checkNameValidity(genName) && attempt <= maxTries || uniqueList.includes(genName))
         uniqueList.push(genName);
-        console.log(genName);
             
         nameList.insertAdjacentHTML("afterbegin", "<li>" + genName + "</li>");
     }
