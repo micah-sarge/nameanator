@@ -22,6 +22,7 @@ function generateNames(numberOfNames) {
             attempt++;
         } while (!checkNameValidity(genName) && attempt <= maxTries || uniqueList.includes(genName))
         uniqueList.push(genName);
+        console.log(genName);
             
         nameList.insertAdjacentHTML("afterbegin", "<li>" + genName + "</li>");
     }
@@ -51,7 +52,8 @@ function checkNameValidity(generatedName){
         }
     }
 
-    if (currentMap.has(" ")) {
+    if (currentMap.has("end")) {
+        // The generated name already exists in the base list
         return false;
     }
 

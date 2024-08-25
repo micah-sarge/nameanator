@@ -134,7 +134,7 @@ function addNameToExistingNames(nameToAdd) {
         }
     }
     // Set a final entry for this letter indicating that this end is a valid name
-    currentMap.set(" ", "");
+    currentMap.set("end", "");
 }
 
 function createAlphabet(listOfNames) {
