@@ -81,7 +81,7 @@ function generateSingleName() {
     var theName = new Array();
 
     //sum the starting letter array to use for next calculation
-    for (var i=0; i<27; i++) {
+    for (var i=0; i<(alphaLength+1); i++) {
         arraySum += firstLetters[i];
     }
 
@@ -94,10 +94,10 @@ function generateSingleName() {
     }
 
     //convert i index to corresponding letter for first letter of name
-    theName[0] = String.fromCharCode(i+97);
+    theName[0] = alphabetArray[i];
 
     //repeat the process of sum, random, and mod
-    for (var j=0, arraySum=0; j<27; j++) {
+    for (var j=0, arraySum=0; j<(alphaLength+1); j++) {
         arraySum += doubleLetters[i][j];
     }
 
@@ -109,13 +109,13 @@ function generateSingleName() {
     }
 
     //convert j index to corresponding letter for second letter of name
-    theName[1] = String.fromCharCode(j+97);
+    theName[1] = alphabetArray[j];
 
     //start a loop to generate letters based on the two previous letters
     var wordEnd=false
     for (var x=2; !wordEnd; x++) {
         //sum, random, and mod as before
-        for (var k=0, arraySum=0; k<27; k++) {
+        for (var k=0, arraySum=0; k<(alphaLength+1); k++) {
             arraySum += tripleLetters[i][j][k];
         }
 
@@ -127,8 +127,8 @@ function generateSingleName() {
         }
 
         //convert k index to corresponding letter for next letter based on previous two, if terminating character, use " "
-        if (k<26) {
-            theName[x] = String.fromCharCode(k+97);
+        if (k<(alphaLength)) {
+            theName[x] = alphabetArray[k];
         } else {
             wordEnd = true;
         }
