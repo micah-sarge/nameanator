@@ -81,7 +81,7 @@ function generateSingleName() {
     var theName = new Array();
 
     //sum the starting letter array to use for next calculation
-    for (var i=0; i<alphaLength; i++) {
+    for (var i=0; i<(alphaLength+1); i++) {
         arraySum += firstLetters[i];
     }
 
@@ -97,7 +97,7 @@ function generateSingleName() {
     theName[0] = alphabetArray[i];
 
     //repeat the process of sum, random, and mod
-    for (var j=0, arraySum=0; j<alphaLength; j++) {
+    for (var j=0, arraySum=0; j<(alphaLength+1); j++) {
         arraySum += doubleLetters[i][j];
     }
 
@@ -115,7 +115,7 @@ function generateSingleName() {
     var wordEnd=false
     for (var x=2; !wordEnd; x++) {
         //sum, random, and mod as before
-        for (var k=0, arraySum=0; k<alphaLength; k++) {
+        for (var k=0, arraySum=0; k<(alphaLength+1); k++) {
             arraySum += tripleLetters[i][j][k];
         }
 
@@ -127,7 +127,7 @@ function generateSingleName() {
         }
 
         //convert k index to corresponding letter for next letter based on previous two, if terminating character, use " "
-        if (k<(alphaLength-1)) {
+        if (k<(alphaLength)) {
             theName[x] = alphabetArray[k];
         } else {
             wordEnd = true;

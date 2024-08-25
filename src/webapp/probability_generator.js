@@ -89,7 +89,7 @@ function processName(currentName) {
     a = currentName.charAt(x);
     b = currentName.charAt(x+1);
 
-    tripleLetters[alphabetMap.get(a)][alphabetMap.get(b)][(alphaLength-1)] += 1;
+    tripleLetters[alphabetMap.get(a)][alphabetMap.get(b)][alphaLength] += 1;
 
     // Set the min/max name lengths
     checkMinMax(currentName.length);
