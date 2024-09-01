@@ -51,7 +51,8 @@ function checkNameValidity(generatedName){
         }
     }
 
-    if (currentMap.has(" ")) {
+    if (currentMap.has("end")) {
+        // The generated name already exists in the base list
         return false;
     }
 

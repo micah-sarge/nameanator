@@ -15,7 +15,7 @@ button {
     margin-bottom: 5px;
 }
 
-.lang-div h1 {
+.probability-div h1 {
     margin: 0;
 }
 
@@ -34,7 +34,7 @@ button {
     max-height: 60vh;
 }
 
-.lang-label {
+.probability-label {
     font-size: 30px;
 }
 
@@ -42,7 +42,7 @@ button {
     font-size: 15px;
 }
 
-.lang-header {
+.probability-header {
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -57,5 +57,6 @@ button {
 
 .no-bullets {
     list-style-type: none;
+    font-size: 20px;
 }
 
