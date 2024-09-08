@@ -21,29 +21,26 @@ var probabilitiesGenerated = false;
 function generateProbabilityFile () {
     let selectedList = document.getElementById("probability_lists");
 
-    if (selectedList.value == "top400") {
-        fetch("data/top_400_baby_names_2010s.txt")
-            .then(response => response.text())
-            .then(text => {
-                let listOfNames = text.split(/\r?\n/);
-                // Create an alphabet using the characters in the data set
-                createAlphabet(listOfNames);
-                listOfNames.forEach(processName);
-            })
-            alertUserAfterGeneration("top_400_baby_names_2010s.txt");
-    } else if (selectedList.value == "1200Males") {
-        fetch("data/1200MaleNames.txt")
-            .then(response => response.text())
-            .then(text => {
-                let listOfNames = text.split(/\r?\n/);
-                // Create an alphabet using the characters in the data set
-                createAlphabet(listOfNames);
-                listOfNames.forEach(processName);
-            })
-        alertUserAfterGeneration("1200MaleNames.txt");
-    } else {
+    // If no value from the list has been selected
+    if (selectedList.value == "nothing") {
         alert("No list of names was selected.");
+        return;
     }
+
+    // The directory location of the data
+    let filename = "data/";
+    filename = filename.concat(selectedList.value)
+
+    fetch(filename)
+        .then(response => response.text())
+        .then(text => {
+            let listOfNames = text.split(/\r?\n/);
+            // Create an alphabet using the characters in the data set
+            createAlphabet(listOfNames);
+            listOfNames.forEach(processName);
+        })
+    alertUserAfterGeneration(selectedList.value);
+    
     
 }
 
