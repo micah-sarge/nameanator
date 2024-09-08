@@ -38,6 +38,11 @@ button {
     font-size: 30px;
 }
 
+.user-warning {
+    font-size: 20px;
+    color: red;
+}
+
 .number_of_names-label {
     font-size: 15px;
 }

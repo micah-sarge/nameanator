@@ -18,6 +18,9 @@ var alphaLength = 0;
 // Indicates that probabilities have been generated
 var probabilitiesGenerated = false;
 
+// Recommended miminum range
+var RECOMMENDED_MINIMUM = 50;
+
 function generateProbabilityFile () {
     let selectedList = document.getElementById("probability_lists");
 
@@ -40,6 +43,7 @@ function generateProbabilityFile () {
             listOfNames.forEach(processName);
         })
     alertUserAfterGeneration(selectedList.value);
+    clearUserWarning();
     
     
 }
@@ -52,6 +56,13 @@ function fileSelected(event) {
 
     reader.onload = function() {
         let listOfNames = reader.result.split(/\r?\n/);
+        
+        // Warn the user about recommended list length
+        if (listOfNames.length < RECOMMENDED_MINIMUM) {
+            warnUser(listOfNames.length);
+        } else {
+            clearUserWarning();
+        }
 
         // Create an alphabet using the characters in the data set
         createAlphabet(listOfNames);
@@ -189,5 +200,18 @@ function alertUserAfterGeneration(fileName) {
     userAlert.insertAdjacentHTML("afterbegin",  "Name probabilities have been generated from: " + fileName);
 
     probabilitiesGenerated = true;
+}
 
+function warnUser(lengthOfList) {
+    // Warn the user that their chosen list is a little short
+    var userWarning = document.getElementById("userWarnings");
+    userWarning.innerHTML = "";
+    userWarning.insertAdjacentHTML("afterbegin",  "!Name generation works better the longer the list. Recommended " +
+        " you have at least 50 items. Your list contains only " + lengthOfList + "!");
+}
+
+function clearUserWarning() {
+    // Clears the section warning the user
+    var userWarning = document.getElementById("userWarnings");
+    userWarning.innerHTML = "";
 }
