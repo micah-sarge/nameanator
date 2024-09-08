@@ -1,0 +1,108 @@
+Summary
+This name generator builds names based on combinations of three letters.
+It first reads a source list to build a 3D matrix of letter combinations, then
+uses the matrix to build new names, with each letter based on the previous two.
+
+
+In Greater Length
+  This project was originally conceived in 2011 from my frustration with online
+name 'generators' and my desire to come up with a cool character name for the
+hot game of the year: Skyrim. Online name 'generators' at the time were just
+randomly picking from a list of names that a person had generated, and so I 
+decided to write a program that would turn a list of names into a set of rules,
+and then use that set of rules to build a name letter by letter, to make what I
+considererd a true name generator.
+
+The Harmony of Three
+  I had heard at the time of a project that was attempting to break down music
+from classical composers into tables of note combinations that could be used to
+procedurally generate new music in the style of a specific composer. This led
+me to the idea of breaking down names into three letter combinations, creating
+a 3D matrix of data showing what letters could come after any given pair of
+letters. I chose sets of three spcifically becuase, in my opinion, it was the
+optimal balance of context. Using strictly pairs of letters, in which each new
+letter is generated based solely on the preceeding letter, leads to more random
+names that feel less like real names and more like random letter combinations.
+Using four or more letters at a time, where each letter is based on three or
+more preceeding letters, ends up cutting too much flexibility out of the code,
+and mostly or strictly generating names that already exist in the list.
+
+Deconstruction
+  The first step was to read in a list of names, and build data tables out of
+the letter combinations in the names. The data is stored in different arrays,
+the most important being the 3D matrix, but it starts with a list and a table.
+As each name is read in by the program, it first adds 1 to the spot in the list
+that corresponds with the starting letter. For example, we will use the name
+John. Since the name starts with 'J' then we would add 1 to the tenth entry in
+the list since 'j' is the tenth letter of the alphabet. From here, we move on
+to the table, and to the second letter of John. We would add 1 to the point at
+the tenth row and fifteenth column, since that point (10,15) corresponds to the
+values of 'j' as the tenth letter and 'o' as the fifteenth letter. Once we get
+to the third letter and beyond, we can use the 3D matrix to map each sequential
+letter based on the previous two. In our example, we would add 1 to the points
+(10,15,8) corresponding with (j,o,h) and (15,8,14) corresponding with (o,h,n).
+Now that we've reached the end of the name, we add 1 to the point (8,14,27)
+using the 27th entry as a way to show that the name has ended, so that would
+correspond with (h,n,end). Repeating this process will fill the list, table,
+and 3D matrix with values that reflect the probabilities of various letters.
+For example the more names that start with 'J', the higher the value will be in
+the tenth entry in the list, and the more often the letter combination 'cha'
+appears in any name, the higher the (3,8,1) entry in the 3D matrix will be.
+
+This is Where the Fun Begins
+  Now that we've created these data points, we can use them to build new names.
+Starting with the list, we'll sum up the values, then generate a random number
+in that range, and use the list of values to determine what letter corresponds
+with our random number. Using that letter as the start of our generated name,
+we can then move to the table and sum the row that corresponds to our starting
+letter, for example if the starting letter we generated was 'M' then we would
+use the thirteenth row of the table. We generate another random number, use the
+table, and get our second letter, in this example we will use 'i'. Now that we
+have two letters, we can start using the 3D matrix to add each new letter based
+on the previous two. We would sum up all the values (13,9,x) since 'm' and 'i'
+are the thirteenth and ninth letters, get a new random number, use the values
+to convert that to a character, we'll say we end up with 'c'. We repeat this
+process, shifting the letters back each time, so we would use (9,3,x) since 'i'
+and 'c' are the ninth and third letters, generate a new letter, let's say we
+get 'h'. Advancing to the next step we use (3,8,x) since 'c' and 'h' are the
+third and eighth letters, and this process repeats until the algorithm reaches
+the end of the name by generating a random number that corresponds with the
+terminating 'character' at 27.
+
+The Code that Lept Through Time
+  The above explanation is more or less how the code functioned when I first
+wrote it in 2011, and at the time I was satisfied with my ability to feed it a
+list of names and get new names that felt like they belonged in the existing
+list. I had thought it might be cool to eventually build it into a web app, but
+never did and the project was left on an old drive that I eventually lost. Many
+years later, a friend of mine hit me and another friend up to see if we'd have
+any interest in doing a coding project of some sort together. I brought up my
+old name generator and how I'd considered building it into a web app, and we
+decided to work together to make it happen. We started by talking through the
+original algorithm, and what ideas we had for it, then wrote it in pseudocode,
+then in javascript. Once we had the base code working, we started improving and
+adding to the original, giving it the ability to use a dynamic aphabet instead
+of being hard locked to a-z, including checks to make sure the generated names
+were of appropriate length given the original data set, verifying that it had
+generated a new name that was not in the original data set, adding sample data
+sets, and several other improvements.
+
+Limitations of the Algorithm
+  Due to the way the data sets are built, the generator will never produce any
+three letter combination that does not exist somewhere in the original data,
+which leads to limitations, especially with smaller data sets. The algorithm is
+basically asking, what third letter can come after these two letters that I'm
+currently looking at? If the source data set is too small, then there are few
+options it can choose from, or worse, only one option it can choose from. In a
+worst case example, if the source data set was only the name John, then the
+data would force all names to start with 'J' since all names in the source data
+started with 'J'. All names that started with 'J' had 'o' as the second letter
+so it would always generate 'o' as the second letter. For the 3D matrix, any
+time your two characters are 'j' and 'o', the only option is 'h'. Any time you
+have 'o' and 'h', the only option is 'n', and any time you have 'h' and 'n',
+the only option is ending the name. The smaller the data set, the fewer options
+the algorithm has when generating new characters. Alongside this, if the list
+is mostly short names, such as Japanese names typically being only one to three
+kanji, the algorithm will have the same issue. The dynamic alphabet will use
+the kanji as 'letters' but will not have a lot of data in the 3D matrix to be
+able to build new names with, since each name is so short.
